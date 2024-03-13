@@ -1,22 +1,26 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import FoodItems from "./FoodItems";
-import { Dimensions } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
 const Tab = createMaterialTopTabNavigator();
 
-const TabView = () => {
+type Names = { name: string[] };
+const TabView = (props: Names) => {
   return (
-    <Tab.Navigator
-      screenOptions={{
-        swipeEnabled: false,
-      }}
-      sceneContainerStyle={{ backgroundColor: "transparent" }}
-    >
-      <Tab.Screen name="Frequently Order" component={FoodItems} />
-      <Tab.Screen name="Non-Veg" component={FoodItems} />
-      <Tab.Screen name="Veg" component={FoodItems} />
-    </Tab.Navigator>
+    <NavigationContainer independent={true}>
+      <Tab.Navigator
+        screenOptions={{
+          swipeEnabled: false,
+        }}
+        sceneContainerStyle={{ backgroundColor: "transparent" }}
+      >
+        {props.name.map((prop) => (
+          <Tab.Screen name={prop} key={prop}>
+            {() => <FoodItems isHorizontal={true} />}
+          </Tab.Screen>
+        ))}
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 };
 

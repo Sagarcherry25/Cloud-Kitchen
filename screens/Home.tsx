@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
 import {
   SafeAreaView,
-  StyleSheet,
   View,
   Text,
   Dimensions,
+  Image,
   ScrollView,
 } from "react-native";
 import { globalStyles } from "../utilities/GlobalStyles";
@@ -14,6 +14,11 @@ import Carousel from "react-native-reanimated-carousel";
 import Animated from "react-native-reanimated";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import TabView from "../components/TabView";
+import FoodCategories from "../components/FoodCategories";
+import { NavigationContainer } from "@react-navigation/native";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import FoodItems from "../components/FoodItems";
+import StickyHeader from "../components/StickyHeader";
 
 const width = Dimensions.get("window").width;
 
@@ -66,48 +71,12 @@ const Data = [
   },
 ];
 const Home = () => {
-  const { safeAreaWrapper, container, textInput } = globalStyles;
-
+  const { safeAreaWrapper, container } = globalStyles;
   return (
-    <SafeAreaView style={safeAreaWrapper} className="android:mt-10">
+    <SafeAreaView style={safeAreaWrapper} className="flex-auto android:mt-10">
       <View style={container}>
-        <View className="flex flex-row">
-          <View className="basis-2/12">
-            <Avatar.Text size={50} label={"SC"} />
-          </View>
-          <View className="basis-9/12 pl-2 pt-1">
-            <Text>Deliver to</Text>
-            <Text className="pt-1 text-base font-extrabold">
-              Manikonda, Hyderabad
-            </Text>
-          </View>
-          <View className="basis-1/12 mt-2">
-            <Feather name={"bell"} size={30} color={"black"} />
-          </View>
-        </View>
-        <View className="mt-4">
-          <Divider />
-        </View>
-        <TextInput
-          style={textInput}
-          secureTextEntry={true}
-          underlineColor="transparent"
-          activeUnderlineColor="lightgrey"
-          right={
-            <TextInput.Icon
-              name={() => (
-                <MaterialCommunityIcons
-                  name={"magnify"}
-                  size={30}
-                  color={"grey"}
-                />
-              )} // where <Icon /> is any component from vector-icons or anything else
-              //   onPress={() => { isPasswordSecure ? setIsPasswordSecure(false) : setIsPasswordSecure(true) }}
-              // isPasswordSecure ? "eye-off" :
-            />
-          }
-        />
-        <ScrollView contentContainerStyle={{flex:1}} className="flex-1">
+        <StickyHeader />
+        <ScrollView>
           <Carousel
             loop
             width={width - 50}
@@ -119,10 +88,7 @@ const Home = () => {
             renderItem={({ item }) => (
               <View
                 style={{
-                  flex: 1,
-                  justifyContent: "center",
                   overflow: "hidden",
-                  alignItems: "center",
                   padding: 20,
                   borderWidth: 1,
                   borderColor: "transparent",
@@ -130,7 +96,7 @@ const Home = () => {
                 }}
                 className="flex-auto justify-center items-center border border-transparent rounded-3xl p-20 "
               >
-                <Animated.Image
+                <Image
                   source={{ uri: item.imageUrl }}
                   style={{
                     width: width,
@@ -164,8 +130,24 @@ const Home = () => {
               </View>
             )}
           />
-          <Text>Menu</Text>
-          <TabView />
+          <View>
+            <FoodCategories />
+          </View>
+          <View className="mt-5">
+            <Text className="text-xl font-semibold pb-3">
+              Most Recent Placed Orders
+            </Text>
+            <FoodItems isFullItem={true} />
+          </View>
+          {/* <View>
+            <FoodCategories />
+          </View>
+          <View>
+            <FoodCategories />
+          </View>
+          <View>
+            <FoodCategories />
+          </View> */}
         </ScrollView>
       </View>
     </SafeAreaView>
