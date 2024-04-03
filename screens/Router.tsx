@@ -5,6 +5,7 @@ import SignUp from "./SignUp";
 import Tabs from "../components/Tabs";
 import ForgotPassword from "./ForgotPassword";
 import { RootStackParamList } from "../utilities/RouteParams";
+import Maps from "./Maps";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Router = () => {
@@ -24,6 +25,7 @@ const Router = () => {
           headerShown: false,
         }}
       />
+      <Stack.Screen name="Maps" component={Maps} />
     </Stack.Navigator>
   );
 };

@@ -1,19 +1,44 @@
 import React from "react";
 import { Text, View } from "react-native";
-import { Avatar, Divider, TextInput } from "react-native-paper";
-import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Avatar, Button, TextInput } from "react-native-paper";
+import {
+  Feather,
+  MaterialIcons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import { globalStyles } from "../utilities/GlobalStyles";
+import { Link } from "@react-navigation/native";
 
 const { textInput } = globalStyles;
 const StickyHeader = () => (
-  <>
-    <View className="flex-row">
+  <View
+    style={{
+      elevation: 3,
+      backgroundColor: "#fff",
+    }}
+  >
+    <View className="flex-row mb-3 z-50">
       <View className="basis-2/12">
-        <Avatar.Text size={50} label={"SC"} />
+        <Avatar.Text size={50} label={"S"} />
       </View>
-      <View className="basis-9/12 pl-2 pt-1">
-        <Text>Deliver to</Text>
-        <Text className="pt-1 text-base font-extrabold">
+      <View className="basis-9/12">
+        <Link to={{ screen: "Maps" }}>
+          <Button
+            compact={true}
+            contentStyle={{ flexDirection: "row-reverse" }}
+            icon={() => (
+              <MaterialIcons
+                name="keyboard-arrow-down"
+                size={25}
+                color={"black"}
+              />
+            )}
+            textColor="black"
+          >
+            Home
+          </Button>
+        </Link>
+        <Text className="text-base font-extrabold -mt-2 ml-2">
           Manikonda, Hyderabad
         </Text>
       </View>
@@ -21,17 +46,14 @@ const StickyHeader = () => (
         <Feather name={"bell"} size={30} color={"black"} />
       </View>
     </View>
-    <View className="mt-4">
-      <Divider />
-    </View>
     <TextInput
-      style={textInput}
-      secureTextEntry={true}
-      underlineColor="transparent"
-      activeUnderlineColor="lightgrey"
+      style={[textInput, { marginBottom: 0 }]}
+      mode="outlined"
+      activeOutlineColor="transparent"
+      outlineColor="transparent"
       right={
         <TextInput.Icon
-          name={() => (
+          icon={() => (
             <MaterialCommunityIcons name={"magnify"} size={30} color={"grey"} />
           )} // where <Icon /> is any component from vector-icons or anything else
           //   onPress={() => { isPasswordSecure ? setIsPasswordSecure(false) : setIsPasswordSecure(true) }}
@@ -39,7 +61,7 @@ const StickyHeader = () => (
         />
       }
     />
-  </>
+  </View>
 );
 
 export default StickyHeader;

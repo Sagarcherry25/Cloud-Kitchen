@@ -8,15 +8,9 @@ import {
   ScrollView,
 } from "react-native";
 import { globalStyles } from "../utilities/GlobalStyles";
-import { Avatar, Divider, TextInput } from "react-native-paper";
-import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import Carousel from "react-native-reanimated-carousel";
-import Animated from "react-native-reanimated";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import TabView from "../components/TabView";
 import FoodCategories from "../components/FoodCategories";
-import { NavigationContainer } from "@react-navigation/native";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import FoodItems from "../components/FoodItems";
 import StickyHeader from "../components/StickyHeader";
 
@@ -75,21 +69,25 @@ const Home = () => {
   return (
     <SafeAreaView style={safeAreaWrapper} className="flex-auto android:mt-10">
       <View style={container}>
-        <StickyHeader />
-        <ScrollView>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          stickyHeaderIndices={[0]}
+        >
+          <StickyHeader />
           <Carousel
             loop
             width={width - 50}
             height={width / 2}
-            autoPlay={false}
+            autoPlay={true}
             data={Data}
-            scrollAnimationDuration={1000}
+            scrollAnimationDuration={3000}
             onSnapToItem={(index) => {}}
             renderItem={({ item }) => (
               <View
                 style={{
                   overflow: "hidden",
-                  padding: 20,
+                  margin: 20,
                   borderWidth: 1,
                   borderColor: "transparent",
                   borderRadius: 25,
@@ -108,7 +106,7 @@ const Home = () => {
                 <View className="absolute right-8 top-3">
                   {item.couponCode && item.discountText && (
                     <Fragment>
-                      <Text className="font-extrabold text-white text-4xl">
+                      <Text className="font-extrabold text-white text-2xl">
                         {item.discountText.toLocaleUpperCase()}
                       </Text>
                       <Text className="font-extrabold text-white text-lg">

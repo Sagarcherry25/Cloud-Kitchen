@@ -61,7 +61,7 @@ const SignUp = () => {
             activeUnderlineColor="lightgrey"
             right={
               <TextInput.Icon
-                name={() => (
+                icon={() => (
                   <MaterialCommunityIcons
                     name={"eye-off"}
                     size={20}

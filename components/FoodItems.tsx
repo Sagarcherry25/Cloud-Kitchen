@@ -1,5 +1,6 @@
 import React from "react";
-import { FlatList, View, Image, Text, SafeAreaView } from "react-native";
+import { FlatList, View, Image, Text } from "react-native";
+import { IconButton, Icon } from "react-native-paper";
 
 export interface FoodItemsProps {
   isHorizontal?: boolean;
@@ -9,7 +10,7 @@ export interface FoodItemsProps {
 const DATA = [
   {
     title: "Plain Dosa",
-    calories: 0,
+    calories: 100,
     weight: 10,
     price: 80,
     imageUrl:
@@ -17,7 +18,7 @@ const DATA = [
   },
   {
     title: "Masala Dosa",
-    calories: 0,
+    calories: 200,
     weight: 10,
     price: 80,
     imageUrl:
@@ -25,7 +26,7 @@ const DATA = [
   },
   {
     title: "Idli",
-    calories: 0,
+    calories: 200,
     weight: 10,
     price: 80,
     imageUrl:
@@ -33,7 +34,7 @@ const DATA = [
   },
   {
     title: "Paneer Dosa",
-    calories: 0,
+    calories: 400,
     weight: 10,
     price: 80,
     imageUrl:
@@ -46,21 +47,32 @@ const FoodItems = (props: FoodItemsProps) => {
     <FlatList
       keyExtractor={(item) => item.title}
       data={DATA}
+      scrollEnabled={false}
       renderItem={({ item }) => (
         <View className="flex flex-row border border-s rounded-3xl overflow-hidden mt-5">
           <Image
             source={{ uri: item.imageUrl }}
             alt={item.title}
-            height={160}
-            width={150}
+            height={140}
+            width={140}
             style={{ objectFit: "cover", opacity: 0.9 }}
           />
-          <Text className="font-bold text-xl">{item.title}</Text>
-          <View className="flex flex-row">
-            <Text className="mr-3">{item.calories} kcal</Text>
-            <Text>{item.weight} gm</Text>
+          <View className="flex px-4 py-5 items-left">
+            <Text className="font-bold text-xl pb-2">{item.title}</Text>
+            <View className="flex flex-row pb-2">
+              <Icon source={require('../assets/calories.png')} size={18} />
+              <Text className="ml-1 mr-3">{item.calories} kcal</Text>
+              <Icon source="weight-gram" size={18} color="gray" />
+              <Text>{item.weight} gm</Text>
+            </View>
+            <Text className="font-bold text-lg">₹ {item.price}</Text>
           </View>
-          <Text className="font-bold text-lg">$ {item.price}</Text>
+          <IconButton
+            icon="plus-circle-outline"
+            size={30}
+            onPress={() => console.log("Pressed")}
+            style={{position:'absolute', bottom: 5, right: 5}}
+          />
         </View>
       )}
     />

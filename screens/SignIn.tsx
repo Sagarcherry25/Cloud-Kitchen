@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  Button,
   Platform,
   SafeAreaView,
   StyleSheet,
@@ -64,7 +63,7 @@ const SignIn = ({ navigation }: Props) => {
             activeUnderlineColor="lightgrey"
             right={
               <TextInput.Icon
-                name={() => (
+                icon={() => (
                   <MaterialCommunityIcons
                     name={"eye-off"}
                     size={20}

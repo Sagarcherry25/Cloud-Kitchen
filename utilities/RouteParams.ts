@@ -3,4 +3,5 @@ export type RootStackParamList = {
     'Sign Up': undefined;
     'Forget Password': undefined;
     'Tabs': undefined;
+    'Maps': undefined;
   };
